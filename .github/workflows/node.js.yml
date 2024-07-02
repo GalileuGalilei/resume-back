@@ -24,14 +24,8 @@ jobs:
     - name: Create .env file
       run: echo "${{ secrets.ENV }}" > .env
 
-    - name: Debug base64 content
-      run: echo "${{ secrets.FIREBASE64 }}" | base64 --decode
-
     - name: Decode and create firebaseService.json
       run: echo "${{ secrets.FIREBASE64 }}" | base64 --decode > src/firebaseService.json
-
-    - name: Check firebaseService.json content
-      run: cat src/firebaseService.json
 
     - name: Install dependencies
       run: npm install
