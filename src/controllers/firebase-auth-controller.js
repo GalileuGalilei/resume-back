@@ -14,6 +14,33 @@ const auth = getAuth();
 
 //no futuro tem que ir para o user-controller.js
 class UserResumeEditController {
+    getUserResume(req, res) {
+        // Ensure the user is authenticated
+        const user = auth.currentUser;
+        if (!user) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
+
+        // Get a reference to the user's resume document in Firestore
+        const userResumeRef = db.collection('resumes').doc(user.uid);
+
+        // Get the user's resume document from Firestore
+        userResumeRef.get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const userResume = doc.data();
+                    res.status(200).json(userResume);
+                }
+                else {
+                    res.status(404).json({ error: "User resume not found" });
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).json({ error: "Internal Server Error" });
+            });
+    }
+
     getPublicResumes(req, res) {
         db.collection('resumes').get()
             .then((snapshot) => {
