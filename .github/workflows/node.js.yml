@@ -27,10 +27,5 @@ jobs:
     - name: Decode and create firebaseService.json
       run: echo "${{ secrets.FIREBASE64 }}" | base64 --decode > src/firebaseService.json
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run start script
-      run: npm run start
 
     # Add any additional steps here if needed, such as deploying to a server
