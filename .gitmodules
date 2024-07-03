@@ -1,0 +1,3 @@
+[submodule "src/public"]
+	path = src/public
+	url = https://github.com/elc1090/project3-2024a-alfredo-pedro
