@@ -10,8 +10,26 @@ const {
 
 const auth = getAuth();
 
+
+
 //no futuro tem que ir para o user-controller.js
 class UserResumeEditController {
+    getPublicResumes(req, res) {
+        db.collection('resumes').get()
+            .then((snapshot) => {
+                const resumes = [];
+                snapshot.forEach((doc) => {
+                    resumes.push(doc.data());
+                });
+                res.status(200).json(resumes);
+            })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        );
+    }
+
     updateUserResume(req, res) {
         const { 
             name,
