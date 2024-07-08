@@ -145,7 +145,10 @@ class FirebaseAuthController {
                 if (idToken) {
                     res.cookie('access_token', idToken, {
                         httpOnly: true
+
                     });
+                    //cookie para verificar se o usuario esta logado
+                    res.cookie('logged_in', true, { httpOnly: false });
                     res.status(200).json({ message: "User logged in successfully", userCredential });
                 } else {
                     res.status(500).json({ error: "Internal Server Error" });
