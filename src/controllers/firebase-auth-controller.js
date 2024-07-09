@@ -163,6 +163,7 @@ class FirebaseAuthController {
         signOut(auth)
             .then(() => {
                 res.clearCookie('access_token');
+                res.clearCookie('logged_in');
                 res.status(200).json({ message: "User logged out successfully" });
             })
             .catch((error) => {
