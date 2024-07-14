@@ -9,40 +9,9 @@ const {
 } = require('../config/firebase');
 
 const auth = getAuth();
-import { jsPDF } from 'jspdf';
 
 //no futuro tem que ir para o user-controller.js
 class UserResumeEditController {
-
-    convertUserResumeToPDF(req, res) {
-        //convert user resume to pdf and download to client
-        const user = auth.currentUser;
-        if (!user) {
-            return res.status(401).json({ error: "Unauthorized" });
-        }
-
-        // Get a reference to the user's resume document in Firestore
-        const userResumeRef = db.collection('resumes').doc(user.uid);
-
-        // Get the user's resume document from Firestore
-        userResumeRef.get()
-            .then((doc) => {
-                if (doc.exists) {
-                    const userResume = doc.data();
-                    const doc = new jsPDF();
-                    doc.text(userResume.name, 10, 10);
-                    doc.text(userResume.email, 10, 20);
-                    doc.text(userResume.phone, 10, 30);
-                    doc.text(userResume.location, 10, 40);
-                    doc.text(userResume.birthdate, 10, 50);
-                    doc.text(userResume.gender, 10, 60);
-                    doc.text(userResume.area, 10, 70);
-                    doc.text(userResume.formation, 10, 80);
-                    doc.text(userResume.description, 10, 90);
-                    doc.save('resume.pdf');
-                    res.status(200).json({ message: "User resume downloaded successfully!" });
-                }});
-    }
 
     getUserResume(req, res) {
         // Ensure the user is authenticated
