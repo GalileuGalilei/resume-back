@@ -9,6 +9,8 @@ router.post('/api/login', authController.loginUser);
 router.post('/api/logout', authController.logoutUser);
 router.post('/api/reset-password', authController.resetPassword);
 
-router.post('api/update-resume', verifyToken, resumeController.updateUserResume);
+router.post('/api/update-resume', verifyToken, resumeController.updateUserResume);
+router.get('/api/get-user-resume', verifyToken, resumeController.getUserResume);
+router.get('/api/get-public-resume', resumeController.getPublicResumes);
 
 module.exports = router;
