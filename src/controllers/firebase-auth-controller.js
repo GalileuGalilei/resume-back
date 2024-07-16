@@ -10,10 +10,9 @@ const {
 
 const auth = getAuth();
 
-
-
 //no futuro tem que ir para o user-controller.js
 class UserResumeEditController {
+
     getUserResume(req, res) {
         // Ensure the user is authenticated
         const user = auth.currentUser;
